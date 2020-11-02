@@ -10,11 +10,19 @@ module.exports = gql`
   type Location {
     id: ID!
     name: String!
-    zombies: [Zombie]
+    zombies: [Zombie]!
   }
 
   type Query {
     getZombies: [Zombie]
     getLocations: [Location]
+  }
+
+  type Mutation {
+    changeZombieLocation(
+      locationId: String!
+      zombieId: String!
+      newLocationId: String!
+    ): [Location]
   }
 `;

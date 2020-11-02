@@ -6,4 +6,7 @@ module.exports = {
     ...zombieResolvers.Query,
     ...locationResolvers.Query,
   },
+  Mutation: {
+    ...locationResolvers.Mutation
+  }
 };
