@@ -1,5 +1,8 @@
-require('dotenv').config();
-const { ApolloServer } = require('apollo-server');
+if (process.env.NODE_ENV !== 'production') {
+  require('dotenv').config();
+}
+const express = require('express');
+const { ApolloServer } = require('apollo-server-express');
 const mongoose = require('mongoose');
 
 const typeDefs = require('./graphql/typeDefs');
@@ -10,15 +13,33 @@ const server = new ApolloServer({
   resolvers,
 });
 
-const port = 5000;
+const port = process.env.PORT || 5000;
+
+const app = express();
+server.applyMiddleware({ app });
+
+//concurrently "nodemon index" "cd client && yarn start"
+
+if (process.env.NODE_ENV === 'production') {
+  app.use(express.static(`${__dirname}/client/build`));
+  app.get('/', (req, res) => {
+    res.sendFile(`${__dirname}/client/build/index.html`);
+  });
+}
 
 mongoose
   .connect(process.env.MONGODB, {
     useNewUrlParser: true,
     useUnifiedTopology: true,
   })
-  .then(() => {
-    console.log('MongoDB Connected!');
-    return server.listen({ port: port });
-  })
-  .then(() => console.log(`Server running on port ${port}`));
+  .then(() =>
+    app.listen({ port: port }, () => {
+      console.log(
+        `Server ready at http://localhost:${port}${server.graphqlPath}`
+      );
+    })
+  )
+  .catch((err) => {
+    console.log(err);
+    throw new Error(err);
+  });
