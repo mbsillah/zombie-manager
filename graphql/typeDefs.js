@@ -23,6 +23,6 @@ module.exports = gql`
       locationId: String!
       zombieId: String!
       newLocationId: String!
-    ): Location!
+    ): [Location]!
   }
 `;

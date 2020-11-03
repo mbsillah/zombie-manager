@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import Form from './Form';
 import { Collapse } from 'react-collapse';
 
-function Location({ location }) {
+function Location({ location, locations }) {
   const [toggle, setToggle] = useState(false);
 
   return (
@@ -13,21 +13,19 @@ function Location({ location }) {
       </header>
       <ul className="zombieList">
         {location.zombies.map((zombie) => (
-          <React.Fragment>
-            <li className="zombieContainer" key={zombie.id}>
+          <React.Fragment key={zombie.id}>
+            <li className="zombieContainer">
               <span>{zombie.name}</span>
             </li>
-            <Collapse isOpen={toggle}>
-              <Form />
-            </Collapse>
+            {/* <Collapse isOpen={toggle}> */}
+            <Form
+              locations={locations}
+              locationId={location.id}
+              zombieId={zombie.id}
+            />
+            {/* </Collapse> */}
           </React.Fragment>
         ))}
-        {/* <li className="zombieContainer">
-          <span>Example1</span>
-        </li>
-        <li className="zombieContainer">
-          <span>Example1</span>
-        </li> */}
       </ul>
     </div>
   );

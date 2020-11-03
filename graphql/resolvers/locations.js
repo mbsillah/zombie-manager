@@ -27,10 +27,8 @@ module.exports = {
         await location.save();
         await newLocation.save();
         
-        const updatedLocation = await models.Location.findById(
-          newLocationId
-        ).populate('zombies');
-        return updatedLocation;
+        const updatedLocations = await models.Location.find().populate('zombies');
+        return updatedLocations;
       } catch (error) {
         throw new Error(error);
       }

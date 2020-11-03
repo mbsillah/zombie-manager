@@ -1,21 +1,8 @@
 import React from 'react';
 import './App.css';
-import gql from 'graphql-tag';
 import { useQuery } from '@apollo/react-hooks';
+import { GET_LOCATIONS_QUERY } from './utils/graphql';
 import Location from './components/Location';
-
-const GET_LOCATIONS_QUERY = gql`
-  {
-    getLocations {
-      id
-      name
-      zombies {
-        id
-        name
-      }
-    }
-  }
-`;
 
 function App() {
   const { loading, data } = useQuery(GET_LOCATIONS_QUERY);
@@ -30,7 +17,7 @@ function App() {
         ) : (
           data.getLocations &&
           data.getLocations.map((location) => (
-            <Location key={location.id} location={location} />
+            <Location locations={data.getLocations} key={location.id} location={location} />
           ))
         )}
       </div>
