@@ -57,7 +57,12 @@ body {
   overflow: auto;
 }
 
+.zombieForm {
+  padding: 0.5rem;
+}
+
 .zombieContainer {
+  display: inline-block;
   min-height: 6vh;
   display: flex;
   align-items: center;

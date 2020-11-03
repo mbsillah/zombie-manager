@@ -11,7 +11,7 @@ function App() {
     <div>
       <header className="title">zombie manager</header>
       <div className="listContainer">
-        {/* <div>Add New Zombie</div> */}
+        {/* Will be able to add new zombie <div>Add New Zombie</div> */}
         {loading ? (
           <div>Loading.....</div>
         ) : (
