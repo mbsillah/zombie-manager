@@ -1,22 +1,8 @@
 import React from 'react';
 import './App.css';
-
 import gql from 'graphql-tag';
 import { useQuery } from '@apollo/react-hooks';
-
-function App() {
-  const { loading, data } = useQuery(GET_LOCATIONS_QUERY);
-
-  if (data) {
-    console.log(data);
-  }
-
-  return (
-    <div>
-      <h2>Hello World</h2>
-    </div>
-  );
-}
+import Location from './components/Location';
 
 const GET_LOCATIONS_QUERY = gql`
   {
@@ -30,5 +16,26 @@ const GET_LOCATIONS_QUERY = gql`
     }
   }
 `;
+
+function App() {
+  const { loading, data } = useQuery(GET_LOCATIONS_QUERY);
+
+  return (
+    <div>
+      <header className="title">zombie manager</header>
+      <div className="listContainer">
+        {/* <div>Add New Zombie</div> */}
+        {loading ? (
+          <div>Loading.....</div>
+        ) : (
+          data.getLocations &&
+          data.getLocations.map((location) => (
+            <Location key={location.id} location={location} />
+          ))
+        )}
+      </div>
+    </div>
+  );
+}
 
 export default App;

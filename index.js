@@ -18,7 +18,6 @@ const port = process.env.PORT || 5000;
 const app = express();
 server.applyMiddleware({ app });
 
-//concurrently "nodemon index" "cd client && yarn start"
 
 if (process.env.NODE_ENV === 'production') {
   app.use(express.static(`${__dirname}/client/build`));

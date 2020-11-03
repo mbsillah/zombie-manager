@@ -1,4 +1,65 @@
-* {
+@font-face {
+  src: url('./assets/CFNightofTerrorPERSONAL-Reg.ttf');
+  font-family: 'Terror';
+}
+
+*,
+*::after,
+*::before {
   margin: 0;
   padding: 0;
+  box-sizing: inherit;
+}
+
+html {
+  font-size: 100%;
+  background-image: linear-gradient(
+      to right bottom,
+      rgba(0, 0, 64, 0.3),
+      rgba(0, 0, 64, 0.3)
+    ),
+    url('./assets/zombie.jpg');
+  background-size: cover;
+  background-position: top;
+  background-attachment: fixed;
+  /* background-repeat: no-repeat */
+}
+
+body {
+  font-family: 'Lato', sans-serif;
+  box-sizing: border-box;
+  padding: 2rem;
+  color: white;
+}
+
+.title {
+  font-family: 'Terror';
+  font-size: 4rem;
+  text-align: center;
+}
+
+.locationContainer {
+  margin: 2rem 0;
+  background: green;
+  border-radius: 5px;
+}
+
+.locationTitle {
+  border-bottom: solid thin;
+  display: flex;
+  justify-content: space-between;
+  padding: 0.5rem;
+  text-transform: uppercase;
+}
+
+.zombieList {
+  height: 24vh;
+  overflow: auto;
+}
+
+.zombieContainer {
+  min-height: 6vh;
+  display: flex;
+  align-items: center;
+  padding: 0.5rem;
 }
