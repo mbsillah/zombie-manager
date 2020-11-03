@@ -1,8 +1,5 @@
 import React, { useState } from 'react';
-import {
-  // GET_LOCATIONS_QUERY,
-  ZOMBIE_LOCATION_MUTATION,
-} from '../utils/graphql';
+import { ZOMBIE_LOCATION_MUTATION } from '../utils/graphql';
 import { useMutation } from '@apollo/react-hooks';
 
 function Form({ locations, locationId, zombieId }) {
@@ -35,8 +32,9 @@ function Form({ locations, locationId, zombieId }) {
   );
 
   return (
-    <form className="zombieForm" onSubmit={onSubmit}>
+    <form className="formContainer" onSubmit={onSubmit}>
       <select
+        style={{ width: '100%' }}
         name="newLocationId"
         value={values.newLocationId}
         onChange={onChange}
@@ -47,7 +45,14 @@ function Form({ locations, locationId, zombieId }) {
           </option>
         ))}
       </select>
-      <button disabled={values.newLocationId === locationId}>Submit</button>
+      <button
+        style={{ marginLeft: '5px' }}
+        variant="contained"
+        color="primary"
+        disabled={values.newLocationId === locationId}
+      >
+        Submit
+      </button>
     </form>
   );
 }

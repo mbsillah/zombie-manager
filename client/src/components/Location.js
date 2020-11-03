@@ -1,11 +1,8 @@
-import React, { useState } from 'react';
-import Form from './Form';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faEllipsisV } from '@fortawesome/free-solid-svg-icons';
+import React from 'react';
+import Zombie from './Zombie';
+import { Paper } from '@material-ui/core';
 
 function Location({ location, locations }) {
-  const [toggle, setToggle] = useState(false);
-
   return (
     <div className="locationContainer">
       <header className="locationTitle">
@@ -14,22 +11,9 @@ function Location({ location, locations }) {
       </header>
       <ul className="zombieList">
         {location.zombies.map((zombie) => (
-          <React.Fragment key={zombie.id}>
-            <li className="zombieContainer">
-              <div>
-                <span>{zombie.name}</span>
-                <button onClick={() => setToggle(!toggle)}>
-                  <FontAwesomeIcon icon={faEllipsisV} />
-                </button>
-
-                <Form
-                  locations={locations}
-                  locationId={location.id}
-                  zombieId={zombie.id}
-                />
-              </div>
-            </li>
-          </React.Fragment>
+          <li key={zombie.id} className="zombieContainer">
+            <Zombie locations={locations} location={location} zombie={zombie} />
+          </li>
         ))}
       </ul>
     </div>
